@@ -6,6 +6,14 @@ Tested Llama-cpp-python for Visual Languages with the following models:
 - moondream2
 - llava-phi3-mini
 
+
+Main Repository is the amazing [llama-cpp-python](https://github.com/abetlen/llama-cpp-python)<br>
+
+python bindings for [llama.cpp GG project](https://github.com/ggerganov/llama.cpp)
+
+--
+
+
 ### Install dependencies
 ```
 python -m venv venv
@@ -33,3 +41,12 @@ No graphic interface is provided,<br>
 but we use easygui do choose the image file
 
 ---
+
+Read more in the official paper
+
+[LLaVA-Phi: Efficient Multi-Modal Assistant with Small Language Model](https://arxiv.org/pdf/2401.02330)
+
+LlamaCPP Chat Format types here
+
+https://github.com/abetlen/llama-cpp-python/blob/main/llama_cpp/llama_chat_format.py
+
