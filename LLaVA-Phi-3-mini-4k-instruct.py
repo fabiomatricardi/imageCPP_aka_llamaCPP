@@ -19,9 +19,9 @@ Understanding a diagram - "Can you describe this diagram?"
 """
 
 print('Loading the model...')
-chat_handler = Llava15ChatHandler(clip_model_path="phi3minillava/llava-phi3-mini-mmproj-f16.gguf")
+chat_handler = Llava15ChatHandler(clip_model_path="LLaVA-Phi-3-mini-4k-instruct/llava-phi3-mini-mmproj-f16.gguf")
 llm = Llama(
-  model_path="phi3minillava/llava-phi3-mini-Q4_K_M.gguf",
+  model_path="LLaVA-Phi-3-mini-4k-instruct/llava-phi3-mini-Q4_K_M.gguf",
   chat_handler=chat_handler,
   n_ctx=2048, # n_ctx should be increased to accomodate the image embedding
 )
