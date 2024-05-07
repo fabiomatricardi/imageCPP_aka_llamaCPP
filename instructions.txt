@@ -1,0 +1,71 @@
+LLAVA.CPP
+----------
+Instructions from https://huggingface.co/marianna13/llava-phi-2-3b-GGUF
+Model Card for LLaVa-Phi-2-3B-GGUF
+Model Details
+Model Description
+Quantized version of llava-phi-2-3b. Quantization was done using llama.cpp
+
+Developed by: LAION, SkunkworksAI & Ontocord
+Model type: LLaVA is an open-source chatbot trained by fine-tuning Phi-2 on GPT-generated multimodal instruction-following data. It is an auto-regressive language model, based on the transformer architecture
+Finetuned from model: Phi-2
+License: MIT
+Model Sources
+Repository: BakLLaVa
+LLama.cpp: GitHub
+Usage
+make & ./llava-cli -m ../ggml-model-f16.gguf --mmproj ../mmproj-model-f16.gguf --image /path/to/image.jpg
+
+-------INStaLLaTION -----
+python -m venv venv
+venv\Scripts\activate
+pip install streamlit==1.26.0
+pip install llama-cpp-python==0.2.68
+pip install easygui
+
+
+tested with image from https://images.ctfassets.net/1aemqu6a6t65/46MJ6ER585Rwl3NraEIoGL/784c5eb5d87f576b5548b1a2255f08e7/tripadvisortimessquare_taggeryanceyiv_5912?q=72&w=1200&h=630&fit=fill
+
+
+
+from llama_cpp import Llama
+from llama_cpp.llama_chat_format import Llava15ChatHandler
+chat_handler = Llava15ChatHandler(clip_model_path="path/to/llava/mmproj.bin")
+llm = Llama(
+  model_path="./path/to/llava/llama-model.gguf",
+  chat_handler=chat_handler,
+  n_ctx=2048, # n_ctx should be increased to accomodate the image embedding
+)
+
+import base64
+
+def image_to_base64_data_uri(file_path):
+    with open(file_path, "rb") as img_file:
+        base64_data = base64.b64encode(img_file.read()).decode('utf-8')
+        return f"data:image/png;base64,{base64_data}"
+
+# Replace 'file_path.png' with the actual path to your PNG file
+file_path = 'image.jpg'
+data_uri = image_to_base64_data_uri(file_path)
+
+llm.create_chat_completion(
+    messages = [
+        {"role": "system", "content": "You are an assistant who perfectly describes images."},
+        {
+            "role": "user",
+            "content": [
+                {"type" : "text", "text": "What's in this image?"},
+                {"type": "image_url", "image_url": {"url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg" } }
+            ]
+        }
+    ]
+)
+
+
+
+-------------------
+
+To try out https://huggingface.co/jiajunlong/TinyLLaVA-0.55B
+based on OpenELM-450M instruct architecture
+but not gguf
+
