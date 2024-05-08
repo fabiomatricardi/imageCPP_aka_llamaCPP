@@ -1,6 +1,9 @@
 # imageCPP_aka_llamaCPP
 Repo of the code from the Medium article About Visual Languages and Llama.CPP
 
+<img src='https://github.com/fabiomatricardi/imageCPP_aka_llamaCPP/raw/main/VLcpp001.gif' width=900>
+
+
 Tested Llama-cpp-python for Visual Languages with the following models:
 - llava-phi2
 - moondream2
